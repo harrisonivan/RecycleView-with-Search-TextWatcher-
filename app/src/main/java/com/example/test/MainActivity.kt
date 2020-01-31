@@ -15,10 +15,11 @@ import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity(), MainContract.view, View.OnClickListener {
 
-
     private var repository: MainRepository? = MainRepository(this)
     private var MainPresenter: MainPresenter =
         MainPresenter(this, repository)
+
+    var textTemp = ""
     var isNull = false
 
 
@@ -50,14 +51,19 @@ class MainActivity : BaseActivity(), MainContract.view, View.OnClickListener {
 
             override fun afterTextChanged(s: Editable?) {
                 Log.e("s","$s")
-                MainPresenter.getData(s.toString())
+//                MainPresenter.getData(s.toString())
+                textTemp = s.toString()
+
 
             }
         })
+
+        iv_search.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when(v!!.id){
+            R.id.iv_search -> search()
 
         }
     }
@@ -92,6 +98,19 @@ class MainActivity : BaseActivity(), MainContract.view, View.OnClickListener {
 //            }
 //        } )
         adapter.notifyDataSetChanged()
+    }
+
+    override fun showLoading() {
+        ll_loading_screen.visibility= View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        ll_loading_screen.visibility= View.GONE
+    }
+
+
+    private fun search(){
+            MainPresenter.getData(textTemp)
     }
 
 }

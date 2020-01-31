@@ -8,8 +8,8 @@ interface MainContract {
         fun setDataState(isNull: Boolean)
         fun showNoData()
         fun hideNoData()
-//        fun showLoading()
-//        fun hideLoading()
+        fun showLoading()
+        fun hideLoading()
 
     }
 

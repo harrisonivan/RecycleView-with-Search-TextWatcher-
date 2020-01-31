@@ -29,7 +29,7 @@ class MainPresenter(var view : MainContract.view?,var repository: MainContract.r
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
     override fun getData(textQ:String) {
-//        view!!.showLoading()
+        view!!.showLoading()
 
         val sort = "$textQ type:user in:login"
         val jsonObject = JsonObject()
@@ -45,10 +45,10 @@ class MainPresenter(var view : MainContract.view?,var repository: MainContract.r
                             setAdapter(temp,"")
 
                             Log.e("isi","${it.items}")
-//                            view!!.hideLoading()
+                            view!!.hideLoading()
                         }, { error ->
                             Log.e("result", "$error")
-//                            view!!.hideLoading()
+                            view!!.hideLoading()
                         })
                 compositeDisposable.add(disposable)
             }
